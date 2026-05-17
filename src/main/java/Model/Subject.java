@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "subjects")
+
+@NamedQuery(
+        name = "Subject.findAll",
+        query = "SELECT S FROM Subject S"
+)
 public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,4 +34,10 @@ public class Subject {
         this.nombre = nombre;
     }
 
+    public Subject(String nombre, Integer id) {
+        this.nombre = nombre;
+        this.id = id;
+    }
+    public Subject() {
+    }
 }

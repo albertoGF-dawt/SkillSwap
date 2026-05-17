@@ -1,20 +1,18 @@
 package DAO;
+
 import Model.User;
-import jakarta.persistence.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
 import java.util.List;
-import java.util.Objects;
 
-
-/**
- * @author Alberto
- */
-public class ExampleDAO {
+public class UserDAO {
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernateConfig");
 
 
     public void create(User user) {
-         EntityManager em = emf.createEntityManager();
+        EntityManager em = emf.createEntityManager();
 
         try {
             //creamos un entity manager único para esta clase
@@ -32,7 +30,6 @@ public class ExampleDAO {
         }
         //cierra el entity manager que creamos anteriormente
         em.close();
-
     }
     public User read(int id) {
         //crea el entity manager (de nuevo)
@@ -87,6 +84,15 @@ public class ExampleDAO {
             throw  new RuntimeException("Este usuario no existe");
         }
         em.close();
-
     }
+
+
+
+    public List<User> ListAll() {
+        EntityManager em = emf.createEntityManager();
+        List<User> users = em.createNamedQuery("User.findAll", User.class).getResultList();
+        em.close();
+        return users;
+    }
+
 }

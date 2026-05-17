@@ -5,6 +5,12 @@ import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name = "users")
+
+@NamedQuery(
+        name = "User.findAll",
+        query = "SELECT u FROM User u"
+)
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

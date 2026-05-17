@@ -7,6 +7,11 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "bookings")
+
+@NamedQuery(
+        name = "Booking.findAll",
+        query = "SELECT B FROM Booking B"
+)
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,4 +73,14 @@ public class Booking {
         this.estado = estado;
     }
 
+    public  Booking(){
+    }
+
+    public Booking(Integer id, User codAlumno, Mentorship codMentorship, LocalDate fechaReserva, String estado) {
+        this.id = id;
+        this.codAlumno = codAlumno;
+        this.codMentorship = codMentorship;
+        this.fechaReserva = fechaReserva;
+        this.estado = estado;
+    }
 }

@@ -8,6 +8,11 @@ import java.time.LocalTime;
 
 @Entity
 @Table(name = "mentorships")
+
+@NamedQuery(
+        name = "Mentorship.findAll",
+        query = "SELECT M FROM Mentorship M"
+)
 public class Mentorship {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -113,4 +118,17 @@ public class Mentorship {
         this.estado = estado;
     }
 
+    public Mentorship(Integer id, User codMentor, Subject codSubject, String tema, LocalDate fecha, LocalTime hora, Integer duracion, String lugar, String estado) {
+        this.id = id;
+        this.codMentor = codMentor;
+        this.codSubject = codSubject;
+        this.tema = tema;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.duracion = duracion;
+        this.lugar = lugar;
+        this.estado = estado;
+    }
+    public Mentorship() {
+    }
 }
