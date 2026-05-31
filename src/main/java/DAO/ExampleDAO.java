@@ -29,9 +29,9 @@ public class ExampleDAO {
             //hace rollback si falla (Rollback: revertir)
             em.getTransaction().rollback();
             throw new IllegalArgumentException("ERROR, algo falló");
-        }
-        //cierra el entity manager que creamos anteriormente
+        }finally {
         em.close();
+    }
 
     }
     public User read(int id) {
@@ -65,11 +65,9 @@ public class ExampleDAO {
             em.getTransaction().commit();
 
         } catch (Exception e) {
-
             em.getTransaction().rollback();
-            e.printStackTrace();
-
-        } finally {
+            throw new RuntimeException("Error al actualizar usuario", e);
+        }finally {
 
             em.close();
         }
@@ -77,16 +75,17 @@ public class ExampleDAO {
 
     public void delete(int id) {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        //Busca a un usuario por su id en la Base de Datos
-        User user = em.find(User.class, id);
-        if (user != null) {
+        try {
+            em.getTransaction().begin();
+            User user = em.find(User.class, id);
+            if (user == null) throw new RuntimeException("Usuario no existe");
             em.remove(user);
             em.getTransaction().commit();
-        } else {
-            throw  new RuntimeException("Este usuario no existe");
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        } finally {
+            em.close();
         }
-        em.close();
-
     }
 }

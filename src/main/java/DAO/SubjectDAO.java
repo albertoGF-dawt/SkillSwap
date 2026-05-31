@@ -44,11 +44,18 @@ public class SubjectDAO {
         em.close();
         return subjects;
    }
-   public void Delete(int id) {
+    public void delete(int id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        em.remove(subject);
-        em.getTransaction().commit();
-   }
+        //Busca a una asignatura por su id en la Base de Datos
+        Subject subject = em.find(Subject.class, id);
+        if (subject != null) {
+            em.remove(subject);
+            em.getTransaction().commit();
+        } else {
+            throw  new RuntimeException("Este usuario no existe");
+        }
+        em.close();
+    }
 
 }
