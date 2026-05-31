@@ -16,7 +16,6 @@ public class SubjectDAO {
         EntityManager em = emf.createEntityManager();
 
         try {
-            //creamos un entity manager único para esta clase
             em.getTransaction().begin();
             if(subject.getId() == null) {
                 //Crea si no existe
@@ -29,7 +28,6 @@ public class SubjectDAO {
             em.getTransaction().rollback();
             throw new IllegalArgumentException("ERROR, algo falló");
         }
-        //cierra el entity manager que creamos anteriormente
         em.close();
     }
    public  Subject FindPerId(Integer id) {

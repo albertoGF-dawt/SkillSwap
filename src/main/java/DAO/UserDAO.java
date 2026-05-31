@@ -95,4 +95,21 @@ public class UserDAO {
         return users;
     }
 
+
+    //USAR CON CUIDADO
+    public void deleteAll() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            int deleted = em.createQuery("DELETE FROM User u").executeUpdate();
+            em.getTransaction().commit();
+            System.out.println("Usuarios eliminados: " + deleted);
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw new RuntimeException("Error al eliminar todos los usuarios", e);
+        } finally {
+            em.close();
+        }
+    }
+
 }
