@@ -109,7 +109,21 @@ public class MateriasDialog extends JDialog {
         }
     }
 
-    private void eliminarMateria() {
+    private void guardarMateria() {
+        String nombre = campoNombre.getText().trim();
+        if (nombre.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El nombre no puede estar vacío.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // ← comprobación de duplicado
+        if (subjectDAO.existeNombre(nombre)) {
+            JOptionPane.showMessageDialog(this, "Ya existe una materia con ese nombre.", "Duplicado", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Subject subject = new Subject();
+        subject.setNombre(nombre);
         if (idSeleccionado == null) {
             JOptionPane.showMessageDialog(this, "Selecciona una materia de la tabla primero.", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
