@@ -204,6 +204,10 @@ public class TutoriasDialog extends JDialog {
         Mentorship m = construirMentorshipDesdeFormulario();
         if (m == null) return;
 
+        // Preserva el estado original en lugar de sobreescribir con "disponible"
+        String estadoActual = modeloTabla.getValueAt(tabla.getSelectedRow(), 8).toString();
+        m.setEstado(estadoActual);
+
         try {
             mentorshipService.updateMentorship(idSeleccionado, m);
             JOptionPane.showMessageDialog(this, "Tutoría actualizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
