@@ -2,12 +2,12 @@ package DAO;
 
 import Model.Mentorship;
 import jakarta.persistence.*;
+
 import java.util.List;
 
 public class MentorshipDAO {
 
-    private final EntityManagerFactory emf =
-            Persistence.createEntityManagerFactory("hibernateConfig");
+    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernateConfig");
 
     public void create(Mentorship mentorship) {
         EntityManager em = emf.createEntityManager();
@@ -74,8 +74,7 @@ public class MentorshipDAO {
     public List<Mentorship> findAll() {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createNamedQuery("Mentorship.findAll", Mentorship.class)
-                    .getResultList();
+            return em.createNamedQuery("Mentorship.findAll", Mentorship.class).getResultList();
         } finally {
             em.close();
         }
@@ -84,10 +83,7 @@ public class MentorshipDAO {
     public List<Mentorship> findAvailable() {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery(
-                    "SELECT m FROM Mentorship m WHERE m.estado = 'disponible' AND m.fecha >= CURRENT_DATE",
-                    Mentorship.class
-            ).getResultList();
+            return em.createQuery("SELECT m FROM Mentorship m WHERE m.estado = 'disponible' AND m.fecha >= CURRENT_DATE", Mentorship.class).getResultList();
         } finally {
             em.close();
         }
@@ -96,11 +92,7 @@ public class MentorshipDAO {
     public List<Mentorship> findByMentor(int mentorId) {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery(
-                            "SELECT m FROM Mentorship m WHERE m.codMentor.id = :mentorId",
-                            Mentorship.class
-                    ).setParameter("mentorId", mentorId)
-                    .getResultList();
+            return em.createQuery("SELECT m FROM Mentorship m WHERE m.codMentor.id = :mentorId", Mentorship.class).setParameter("mentorId", mentorId).getResultList();
         } finally {
             em.close();
         }
@@ -109,24 +101,25 @@ public class MentorshipDAO {
     public List<Mentorship> findBySubject(int subjectId) {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery(
-                            "SELECT m FROM Mentorship m WHERE m.codSubject.id = :subjectId AND m.estado = 'disponible'",
-                            Mentorship.class
-                    ).setParameter("subjectId", subjectId)
-                    .getResultList();
+            return em.createQuery("SELECT m FROM Mentorship m WHERE m.codSubject.id = :subjectId AND m.estado = 'disponible'", Mentorship.class).setParameter("subjectId", subjectId).getResultList();
         } finally {
             em.close();
         }
     }
+
     public List<Mentorship> findAllEager() {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery(
-                    "SELECT m FROM Mentorship m " +
-                            "JOIN FETCH m.codMentor " +
-                            "JOIN FETCH m.codSubject",
-                    Mentorship.class
-            ).getResultList();
+            return em.createQuery("SELECT m FROM Mentorship m " + "JOIN FETCH m.codMentor " + "JOIN FETCH m.codSubject", Mentorship.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Mentorship> findBySubjectEager(int subjectId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.createQuery("SELECT m FROM Mentorship m " + "JOIN FETCH m.codMentor " + "JOIN FETCH m.codSubject " + "WHERE m.codSubject.id = :subjectId AND m.estado = 'disponible'", Mentorship.class).setParameter("subjectId", subjectId).getResultList();
         } finally {
             em.close();
         }

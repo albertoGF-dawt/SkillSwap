@@ -15,7 +15,7 @@ public class ConsultService {
 
     // Tutorías disponibles por materia
     public List<Mentorship> getTutoriasPorMateria(int subjectId) {
-        return mentorshipDAO.findBySubject(subjectId);
+        return mentorshipDAO.findBySubjectEager(subjectId);
     }
 
     // Tutorías publicadas por un mentor
