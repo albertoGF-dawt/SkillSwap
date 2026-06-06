@@ -67,4 +67,18 @@ public class SubjectDAO {
         em.close();
     }
 
+    public boolean tieneTutorias(int subjectId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Long count = em.createQuery(
+                            "SELECT COUNT(m) FROM Mentorship m WHERE m.codSubject.id = :id",
+                            Long.class
+                    ).setParameter("id", subjectId)
+                    .getSingleResult();
+            return count > 0;
+        } finally {
+            em.close();
+        }
+    }
+
 }

@@ -72,10 +72,10 @@ public class UserDAO {
         }
     }
 
+    //Busca a un usuario por su id en la Base de Datos
     public void delete(int id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        //Busca a un usuario por su id en la Base de Datos
         User user = em.find(User.class, id);
         if (user != null) {
             em.remove(user);
@@ -101,8 +101,7 @@ public class UserDAO {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            int deleted = em.createQuery("DELETE FROM User u").executeUpdate();
-            em.getTransaction().commit();
+            int deleted = em.createQuery("DELETE FROM User u").executeUpdate();em.getTransaction().commit();
             System.out.println("Usuarios eliminados: " + deleted);
         } catch (Exception e) {
             em.getTransaction().rollback();
