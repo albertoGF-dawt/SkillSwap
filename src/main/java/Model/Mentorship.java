@@ -131,4 +131,9 @@ public class Mentorship {
     }
     public Mentorship() {
     }
+
+    @Override
+    public String toString() {
+        return tema;
+    }
 }

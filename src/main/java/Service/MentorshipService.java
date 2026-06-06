@@ -33,7 +33,7 @@ public class MentorshipService {
         if (mentorship == null) {
             throw new RuntimeException("Tutoría no encontrada");
         }
-        if ("reservada".equals(mentorship.getEstado())) {
+        if ("reservada".equals(mentorship.getEstado()) || "pendiente".equals(mentorship.getEstado())) {
             throw new RuntimeException("No se puede eliminar una tutoría ya reservada");
         }
         mentorshipDAO.delete(id);
