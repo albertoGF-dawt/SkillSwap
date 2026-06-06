@@ -118,4 +118,17 @@ public class MentorshipDAO {
             em.close();
         }
     }
+    public List<Mentorship> findAllEager() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.createQuery(
+                    "SELECT m FROM Mentorship m " +
+                            "JOIN FETCH m.codMentor " +
+                            "JOIN FETCH m.codSubject",
+                    Mentorship.class
+            ).getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }

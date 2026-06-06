@@ -79,4 +79,7 @@ public class MentorshipService {
             throw new IllegalArgumentException("La tutoría debe tener una materia asignada");
         }
     }
+    public List<Mentorship> getAllMentorshipsEager() {
+        return mentorshipDAO.findAllEager();
+    }
 }
