@@ -188,6 +188,7 @@ public class TutoriasDialog extends JDialog {
             mentorshipService.createMentorship(m);
             JOptionPane.showMessageDialog(this, "Tutoría creada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             limpiarFormulario();
+            cargarCombos();
             cargarTutorias();
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error de validación", JOptionPane.WARNING_MESSAGE);
