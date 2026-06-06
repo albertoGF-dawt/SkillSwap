@@ -94,5 +94,9 @@ public class User {
         this.ciclo = ciclo;
     }
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
 
 }
