@@ -61,7 +61,9 @@ public class BookingService {
             throw new RuntimeException("No se puede cancelar una reserva ya completada");
         }
 
-        Mentorship mentorship = booking.getCodMentorship();
+        // Busca la tutoría directamente por ID en lugar de cogerla del booking
+        int mentorshipId = booking.getCodMentorship().getId();
+        Mentorship mentorship = mentorshipDAO.read(mentorshipId);
         mentorship.setEstado("disponible");
         mentorshipDAO.update(mentorship.getId(), mentorship);
 

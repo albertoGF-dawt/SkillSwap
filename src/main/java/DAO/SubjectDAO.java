@@ -21,7 +21,7 @@ public class SubjectDAO {
                 //Crea si no existe
                 em.persist(subject);
             }
-            //verifica que se haya creado el usuario
+            //verifica que se haya creado la materia
             em.getTransaction().commit();
         } catch (Exception e) {
             //hace rollback si falla (Rollback: revertir)
@@ -30,6 +30,17 @@ public class SubjectDAO {
         }
         em.close();
     }
+
+    public boolean existeNombre(String nombre) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Long count = em.createQuery("SELECT COUNT(s) FROM Subject s WHERE LOWER(s.nombre) = LOWER(:nombre)", Long.class).setParameter("nombre", nombre).getSingleResult();
+            return count > 0;
+        } finally {
+            em.close();
+        }
+    }
+
    public  Subject FindPerId(Integer id) {
         EntityManager em = emf.createEntityManager();
         Subject subject = em.find(Subject.class, id);

@@ -63,7 +63,8 @@ public class MentorshipService {
         if (mentorship.getFecha() == null) {
             throw new IllegalArgumentException("La fecha es obligatoria");
         }
-        if (mentorship.getFecha().isBefore(LocalDate.now())) {
+        if (mentorship.getFecha().isBefore(LocalDate.now())
+                && "disponible".equals(mentorship.getEstado())) {
             throw new IllegalArgumentException("No se pueden publicar tutorías con fechas pasadas");
         }
         if (mentorship.getHora() == null) {
