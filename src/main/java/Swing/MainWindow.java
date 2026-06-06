@@ -53,6 +53,14 @@ public class MainWindow extends JFrame {
         itemReservas.addActionListener(e -> new ReservasDialog(this));
         menuReservas.add(itemReservas);
 
+        // ── Consultas ──
+        JMenu menuConsultas = new JMenu("Consultas");
+        JMenuItem itemConsultas = new JMenuItem("Ver Consultas");
+        itemConsultas.addActionListener(e -> new ConsultasDialog(this));
+        menuConsultas.add(itemConsultas);
+
+        menuBar.add(menuConsultas); // antes del de Salir
+
         // ── Salir ──
         JMenu menuSalir = new JMenu("Salir");
         JMenuItem itemSalir = new JMenuItem("Cerrar aplicación");
