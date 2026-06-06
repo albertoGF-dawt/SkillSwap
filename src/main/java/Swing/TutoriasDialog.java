@@ -195,7 +195,6 @@ public class TutoriasDialog extends JDialog {
             JOptionPane.showMessageDialog(this, "Error al crear la tutoría:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
     private void actualizarTutoria() {
         if (idSeleccionado == null) {
             JOptionPane.showMessageDialog(this, "Selecciona una tutoría de la tabla primero.", "Aviso", JOptionPane.WARNING_MESSAGE);
