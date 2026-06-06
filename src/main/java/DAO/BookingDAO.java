@@ -120,4 +120,15 @@ public class BookingDAO {
             em.close();
         }
     }
+    public List<Booking> findAllEager() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.createQuery(
+                    "SELECT b FROM Booking b " + "JOIN FETCH b.codAlumno " + "JOIN FETCH b.codMentorship m " + "JOIN FETCH m.codMentor " + "JOIN FETCH m.codSubject",
+                    Booking.class
+            ).getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }

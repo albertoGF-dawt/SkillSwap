@@ -106,4 +106,7 @@ public class BookingService {
             throw new IllegalArgumentException("La reserva debe tener una tutoría asignada");
         }
     }
+    public List<Booking> getAllBookingsEager() {
+        return bookingDAO.findAllEager();
+    }
 }
