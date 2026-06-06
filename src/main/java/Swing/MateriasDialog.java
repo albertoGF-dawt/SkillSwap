@@ -120,6 +120,13 @@ public class MateriasDialog extends JDialog {
             return;
         }
 
+        if (subjectDAO.tieneTutorias(idSeleccionado)) {
+            JOptionPane.showMessageDialog(this,
+                    "No se puede eliminar esta materia porque tiene tutorías asociadas.",
+                    "No se puede eliminar", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         int confirm = JOptionPane.showConfirmDialog(this,
                 "¿Seguro que quieres eliminar esta materia?",
                 "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
