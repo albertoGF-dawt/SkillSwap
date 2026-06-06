@@ -131,4 +131,12 @@ public class BookingDAO {
             em.close();
         }
     }
+    public List<Booking> findByAlumnoEager(int alumnoId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.createQuery("SELECT b FROM Booking b " + "JOIN FETCH b.codAlumno " + "JOIN FETCH b.codMentorship m " + "JOIN FETCH m.codMentor " + "JOIN FETCH m.codSubject " + "WHERE b.codAlumno.id = :alumnoId", Booking.class).setParameter("alumnoId", alumnoId).getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }
