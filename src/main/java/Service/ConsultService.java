@@ -25,7 +25,7 @@ public class ConsultService {
 
     // Reservas de un alumno
     public List<Booking> getReservasPorAlumno(int alumnoId) {
-        return bookingDAO.findByAlumno(alumnoId);
+        return bookingDAO.findByAlumnoEager(alumnoId);
     }
 
     // Total de horas ofrecidas (todas las tutorías)
