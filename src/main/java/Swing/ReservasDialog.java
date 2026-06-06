@@ -128,7 +128,7 @@ public class ReservasDialog extends JDialog {
 
     private void cargarReservas() {
         modeloTabla.setRowCount(0);
-        for (Booking b : bookingService.getAllBookings()) {
+        for (Booking b : bookingService.getAllBookingsEager()) {
             modeloTabla.addRow(new Object[]{
                     b.getId(),
                     b.getCodAlumno().getNombre(),
@@ -199,4 +199,6 @@ public class ReservasDialog extends JDialog {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
         }
     }
+
+
 }

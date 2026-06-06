@@ -164,7 +164,7 @@ public class TutoriasDialog extends JDialog {
 
     private void cargarTutorias() {
         modeloTabla.setRowCount(0);
-        List<Mentorship> lista = mentorshipService.getAllMentorships();
+        List<Mentorship> lista = mentorshipService.getAllMentorshipsEager();
         for (Mentorship m : lista) {
             modeloTabla.addRow(new Object[]{
                     m.getId(),
