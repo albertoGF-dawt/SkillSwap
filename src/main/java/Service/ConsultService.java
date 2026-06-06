@@ -20,7 +20,7 @@ public class ConsultService {
 
     // Tutorías publicadas por un mentor
     public List<Mentorship> getTutoriasPorMentor(int mentorId) {
-        return mentorshipDAO.findByMentor(mentorId);
+        return mentorshipDAO.findByMentorEager(mentorId);
     }
 
     // Reservas de un alumno

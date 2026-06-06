@@ -98,6 +98,15 @@ public class MentorshipDAO {
         }
     }
 
+    public List<Mentorship> findByMentorEager(int mentorId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.createQuery("SELECT m FROM Mentorship m " + "JOIN FETCH m.codMentor " + "JOIN FETCH m.codSubject " + "WHERE m.codMentor.id = :mentorId", Mentorship.class).setParameter("mentorId", mentorId).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     public List<Mentorship> findBySubject(int subjectId) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -119,7 +128,8 @@ public class MentorshipDAO {
     public List<Mentorship> findBySubjectEager(int subjectId) {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("SELECT m FROM Mentorship m " + "JOIN FETCH m.codMentor " + "JOIN FETCH m.codSubject " + "WHERE m.codSubject.id = :subjectId AND m.estado = 'disponible'", Mentorship.class).setParameter("subjectId", subjectId).getResultList();
+            return em.createQuery("SELECT DISTINCT m FROM Mentorship m " + "JOIN FETCH m.codMentor " + "JOIN FETCH m.codSubject " + "WHERE m.codSubject.id = :subjectId",  // ← sin el AND estado='disponible'
+                    Mentorship.class).setParameter("subjectId", subjectId).getResultList();
         } finally {
             em.close();
         }

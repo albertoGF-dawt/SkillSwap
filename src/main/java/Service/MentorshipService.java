@@ -48,7 +48,7 @@ public class MentorshipService {
     }
 
     public List<Mentorship> getMentorshipsByMentor(int mentorId) {
-        return mentorshipDAO.findByMentor(mentorId);
+        return mentorshipDAO.findByMentorEager(mentorId);
     }
 
     public List<Mentorship> getMentorshipsBySubject(int subjectId) {
