@@ -98,24 +98,18 @@ public class ConsultasDialog extends JDialog {
     // PANEL RESUMEN
     // ─────────────────────────────────────────
     private JPanel crearPanelResumen() {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 5));
+        JPanel panel = new JPanel(new BorderLayout(10, 5));
         panel.setBorder(BorderFactory.createTitledBorder("Resumen global"));
 
         labelResumen = new JLabel("Cargando...");
         labelResumen.setFont(new Font("Arial", Font.BOLD, 13));
-        panel.add(labelResumen);
+        panel.add(labelResumen, BorderLayout.CENTER);
 
         JButton btnCerrar = new JButton("Cerrar");
         btnCerrar.addActionListener(e -> dispose());
+        panel.add(btnCerrar, BorderLayout.EAST);
 
-        JPanel panelCerrar = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        panelCerrar.add(btnCerrar);
-
-        JPanel panelSur = new JPanel(new BorderLayout());
-        panelSur.add(panel, BorderLayout.CENTER);
-        panelSur.add(panelCerrar, BorderLayout.EAST);
-
-        return panelSur;
+        return panel;
     }
 
     // ─────────────────────────────────────────
