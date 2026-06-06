@@ -40,4 +40,9 @@ public class Subject {
     }
     public Subject() {
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }
