@@ -32,13 +32,13 @@ public class MainWindow extends JFrame {
         JLabel descripcion = new JLabel("Elige qué opción quieres elegir en el menú superior.", SwingConstants.CENTER);
         JLabel gracias     = new JLabel("Gracias por usar nuestros servicios.", SwingConstants.CENTER);
 
-        bienvenida.setFont(new Font("Arial", Font.BOLD, 24));
-        descripcion.setFont(new Font("Arial", Font.BOLD, 18));
+        bienvenida.setFont(new Font("DejaVu Sans Mono", Font.BOLD, 40));
+        descripcion.setFont(new Font("Arial", Font.BOLD, 20));
         gracias.setFont(new Font("Arial", Font.BOLD, 14));
 
         panelCentral.add(bienvenida);
         panelCentral.add(descripcion);
-        panelCentral.add(gracias);
+        panelCentral.add(gracias, BorderLayout.SOUTH);
 
         add(panelCentral);
 
