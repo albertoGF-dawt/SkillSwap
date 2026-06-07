@@ -1,6 +1,5 @@
 package Swing;
 
-// MainWindow.java
 import javax.swing.*;
 import java.awt.*;
 
@@ -19,7 +18,11 @@ public class MainWindow extends JFrame {
         // Panel central de bienvenida
         JPanel panelCentral = new JPanel(new BorderLayout());
         JLabel bienvenida = new JLabel("Te damos la bienvenida a Skillswap", SwingConstants.CENTER);
+        JLabel descripcion = new JLabel("Elije que opción quieres elegir en el menú superior de la ventana.", SwingConstants.CENTER);
+        JLabel gracias = new JLabel("Gracias por usar nuestros servicios.", SwingConstants.CENTER);
         bienvenida.setFont(new Font("Comfortaa", Font.BOLD, 24));
+        descripcion.setFont(new Font("Comfortaa", Font.BOLD, 18));
+        gracias.setFont(new Font("Comfortaa", Font.BOLD, 14));
         panelCentral.add(bienvenida, BorderLayout.CENTER);
         add(panelCentral);
 
@@ -31,6 +34,7 @@ public class MainWindow extends JFrame {
 
         // ── Usuarios ──
         JMenu menuUsuarios = new JMenu("Usuarios");
+
         JMenuItem itemUsuarios = new JMenuItem("Gestionar Usuarios");
         itemUsuarios.addActionListener(e -> new UsuariosDialog(this));
         menuUsuarios.add(itemUsuarios);
