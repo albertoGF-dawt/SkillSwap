@@ -32,6 +32,10 @@ public class MainWindow extends JFrame {
 
         add(panelCentral);
 
+        Color miColor = new Color(232, 204, 255); // R, G, B
+        panelCentral.setBackground(miColor);
+        getContentPane().setBackground(miColor);
+
         setVisible(true); // Siempre al final
     }
 
