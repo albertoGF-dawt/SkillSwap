@@ -92,6 +92,15 @@ public class MainWindow extends JFrame {
         menuBar.add(menuTutorias);
         menuBar.add(menuReservas);
         menuBar.add(menuSalir);
+
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        menuBar.setBackground(new Color(190, 149, 223));   // fondo de la barra
+        menuBar.setOpaque(true);
         return menuBar;
     }
 }
