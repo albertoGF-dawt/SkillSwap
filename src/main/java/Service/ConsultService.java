@@ -15,17 +15,17 @@ public class ConsultService {
 
     // Tutorías disponibles por materia
     public List<Mentorship> getTutoriasPorMateria(int subjectId) {
-        return mentorshipDAO.findBySubject(subjectId);
+        return mentorshipDAO.findBySubjectEager(subjectId);
     }
 
     // Tutorías publicadas por un mentor
     public List<Mentorship> getTutoriasPorMentor(int mentorId) {
-        return mentorshipDAO.findByMentor(mentorId);
+        return mentorshipDAO.findByMentorEager(mentorId);
     }
 
     // Reservas de un alumno
     public List<Booking> getReservasPorAlumno(int alumnoId) {
-        return bookingDAO.findByAlumno(alumnoId);
+        return bookingDAO.findByAlumnoEager(alumnoId);
     }
 
     // Total de horas ofrecidas (todas las tutorías)
