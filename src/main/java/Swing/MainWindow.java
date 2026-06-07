@@ -24,6 +24,8 @@ public class MainWindow extends JFrame {
         descripcion.setFont(new Font("Comfortaa", Font.BOLD, 18));
         gracias.setFont(new Font("Comfortaa", Font.BOLD, 14));
         panelCentral.add(bienvenida, BorderLayout.CENTER);
+        panelCentral.add(descripcion, BorderLayout.CENTER);
+        panelCentral.add(gracias, BorderLayout.CENTER);
         add(panelCentral);
 
         setVisible(true); // Siempre al final
