@@ -46,15 +46,12 @@ public class ConsultasDialog extends JDialog {
         setVisible(true);
     }
 
-    // ─────────────────────────────────────────
-    // PANEL DE FILTROS
-    // ─────────────────────────────────────────
     private JPanel crearPanelFiltros() {
         JPanel panel = new JPanel(new GridLayout(3, 3, 8, 6));
         panel.setBorder(BorderFactory.createTitledBorder("Filtros de consulta"));
         panel.setPreferredSize(new Dimension(900, 130));
 
-        // Fila 1: filtro por materia
+        // filtro por materia
         panel.add(new JLabel("Tutorías disponibles por materia:"));
         comboMateria = new JComboBox<>();
         panel.add(comboMateria);
@@ -62,7 +59,7 @@ public class ConsultasDialog extends JDialog {
         btnMateria.addActionListener(e -> consultarPorMateria());
         panel.add(btnMateria);
 
-        // Fila 2: filtro por mentor
+        // filtro por mentor
         panel.add(new JLabel("Tutorías publicadas por mentor:"));
         comboMentor = new JComboBox<>();
         panel.add(comboMentor);
@@ -70,7 +67,7 @@ public class ConsultasDialog extends JDialog {
         btnMentor.addActionListener(e -> consultarPorMentor());
         panel.add(btnMentor);
 
-        // Fila 3: filtro por alumno
+        // filtro por alumno
         panel.add(new JLabel("Reservas de un alumno:"));
         comboAlumno = new JComboBox<>();
         panel.add(comboAlumno);
@@ -81,9 +78,6 @@ public class ConsultasDialog extends JDialog {
         return panel;
     }
 
-    // ─────────────────────────────────────────
-    // TABLA
-    // ─────────────────────────────────────────
     private JScrollPane crearTabla() {
         modeloTabla = new DefaultTableModel(new String[]{}, 0) {
             @Override
@@ -94,9 +88,6 @@ public class ConsultasDialog extends JDialog {
         return new JScrollPane(tabla);
     }
 
-    // ─────────────────────────────────────────
-    // PANEL RESUMEN
-    // ─────────────────────────────────────────
     private JPanel crearPanelResumen() {
         JPanel panel = new JPanel(new BorderLayout(10, 5));
         panel.setBorder(BorderFactory.createTitledBorder("Resumen global"));
@@ -112,17 +103,12 @@ public class ConsultasDialog extends JDialog {
         return panel;
     }
 
-    // ─────────────────────────────────────────
-    // CARGA DE COMBOS
-    // ─────────────────────────────────────────
     private void cargarCombos() {
-        // Materias
         comboMateria.removeAllItems();
         for (Subject s : subjectDAO.getSubjects()) {
             comboMateria.addItem(s);
         }
 
-        // Mentores y alumnos
         comboMentor.removeAllItems();
         comboAlumno.removeAllItems();
         for (User u : userDAO.ListAll()) {
@@ -130,10 +116,6 @@ public class ConsultasDialog extends JDialog {
             if ("alumno".equals(u.getRol())) comboAlumno.addItem(u);
         }
     }
-
-    // ─────────────────────────────────────────
-    // CONSULTAS
-    // ─────────────────────────────────────────
 
     private void consultarPorMateria() {
         Subject materia = (Subject) comboMateria.getSelectedItem();
@@ -211,11 +193,6 @@ public class ConsultasDialog extends JDialog {
         labelResumen.setText("Total de horas de mentoría ofrecidas por la comunidad: " + horas + " h");
     }
 
-    // ─────────────────────────────────────────
-    // HELPERS
-    // ─────────────────────────────────────────
-
-    /** Cambia las columnas de la tabla dinámicamente según la consulta */
     private void cambiarColumnas(String[] columnas) {
         modeloTabla.setColumnIdentifiers(columnas);
     }

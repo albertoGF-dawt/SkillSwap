@@ -50,9 +50,6 @@ public class TutoriasDialog extends JDialog {
         setVisible(true);
     }
 
-    // ─────────────────────────────────────────
-    // FORMULARIO
-    // ─────────────────────────────────────────
     private JPanel crearPanelFormulario() {
         JPanel panel = new JPanel(new GridLayout(4, 4, 8, 6));
         panel.setBorder(BorderFactory.createTitledBorder("Datos de la Tutoría"));
@@ -93,9 +90,6 @@ public class TutoriasDialog extends JDialog {
         return panel;
     }
 
-    // ─────────────────────────────────────────
-    // TABLA
-    // ─────────────────────────────────────────
     private JScrollPane crearTabla() {
         String[] columnas = {"ID", "Tema", "Fecha", "Hora", "Duración", "Lugar", "Mentor", "Materia", "Estado"};
         modeloTabla = new DefaultTableModel(columnas, 0) {
@@ -113,9 +107,6 @@ public class TutoriasDialog extends JDialog {
         return new JScrollPane(tabla);
     }
 
-    // ─────────────────────────────────────────
-    // BOTONES
-    // ─────────────────────────────────────────
     private JPanel crearPanelBotones() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
 
@@ -139,10 +130,6 @@ public class TutoriasDialog extends JDialog {
 
         return panel;
     }
-
-    // ─────────────────────────────────────────
-    // LÓGICA CRUD
-    // ─────────────────────────────────────────
 
     private void cargarCombos() {
         // Mentores: usuarios con rol mentor
@@ -204,7 +191,7 @@ public class TutoriasDialog extends JDialog {
         Mentorship m = construirMentorshipDesdeFormulario();
         if (m == null) return;
 
-        // Preserva el estado original en lugar de sobreescribir con "disponible"
+        // Preserva el estado original en lugar de sobreescribir con "disponible" (solución de errores)
         String estadoActual = modeloTabla.getValueAt(tabla.getSelectedRow(), 8).toString();
         m.setEstado(estadoActual);
 
@@ -242,11 +229,6 @@ public class TutoriasDialog extends JDialog {
         }
     }
 
-    // ─────────────────────────────────────────
-    // HELPERS
-    // ─────────────────────────────────────────
-
-    /** Construye un objeto Mentorship con los datos del formulario. Devuelve null si hay error de formato. */
     private Mentorship construirMentorshipDesdeFormulario() {
         String tema     = campoTema.getText().trim();
         String fechaStr = campoFecha.getText().trim();
@@ -310,7 +292,6 @@ public class TutoriasDialog extends JDialog {
         campoFecha.setText(modeloTabla.getValueAt(fila, 2).toString());
         campoHora.setText(modeloTabla.getValueAt(fila, 3).toString());
 
-        // quita el " min" del final
         String durStr = modeloTabla.getValueAt(fila, 4).toString().replace(" min", "");
         campoDuracion.setText(durStr);
 

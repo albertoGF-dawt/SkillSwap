@@ -51,7 +51,7 @@ public class BookingService {
         return booking;
     }
 
-    // Cancelar una reserva devuelve la tutoría a "disponible"
+    // Cancelar una reserva devuelve la tutoría a "disponible" (Solución de errores mencionados)
     public void cancelBooking(int id) {
         Booking booking = bookingDAO.read(id);
         if (booking == null) {

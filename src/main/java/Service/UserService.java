@@ -62,12 +62,10 @@ public class UserService {
         if (!email.contains("@") || !email.contains(".")) {
             throw new IllegalArgumentException("El email debe contener '@' y '.'");
         }
-        // Comprueba que el @ no esté al principio ni al final
         int atIndex = email.indexOf("@");
         if (atIndex == 0 || atIndex == email.length() - 1) {
             throw new IllegalArgumentException("El email no tiene un formato válido");
         }
-        // Comprueba que el . esté después del @
         int dotIndex = email.lastIndexOf(".");
         if (dotIndex < atIndex || dotIndex == email.length() - 1) {
             throw new IllegalArgumentException("El email no tiene un formato válido");

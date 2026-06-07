@@ -79,6 +79,9 @@ public class MentorshipService {
         if (mentorship.getCodSubject() == null) {
             throw new IllegalArgumentException("La tutoría debe tener una materia asignada");
         }
+        if (mentorshipDAO.existeDuplicado(mentorship.getCodMentor().getId(), mentorship.getCodSubject().getId(), mentorship.getFecha(), mentorship.getHora())) {
+            throw new IllegalArgumentException("Ya existe una tutoría de ese mentor en esa materia, fecha y hora");
+        }
     }
     public List<Mentorship> getAllMentorshipsEager() {
         return mentorshipDAO.findAllEager();

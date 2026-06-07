@@ -18,11 +18,9 @@ public class ReservasDialog extends JDialog {
     private final UserDAO userDAO = new UserDAO();
     private final MentorshipDAO mentorshipDAO = new MentorshipDAO();
 
-    // Combos del formulario
     private JComboBox<User> comboAlumno;
     private JComboBox<Mentorship> comboTutoria;
 
-    // Tabla
     private JTable tabla;
     private DefaultTableModel modeloTabla;
     private Integer idSeleccionado = null;
@@ -42,9 +40,6 @@ public class ReservasDialog extends JDialog {
         setVisible(true);
     }
 
-    // ─────────────────────────────────────────
-    // FORMULARIO
-    // ─────────────────────────────────────────
     private JPanel crearPanelFormulario() {
         JPanel panel = new JPanel(new GridLayout(2, 2, 8, 8));
         panel.setBorder(BorderFactory.createTitledBorder("Nueva Reserva"));
@@ -61,9 +56,6 @@ public class ReservasDialog extends JDialog {
         return panel;
     }
 
-    // ─────────────────────────────────────────
-    // TABLA
-    // ─────────────────────────────────────────
     private JScrollPane crearTabla() {
         String[] columnas = {"ID", "Alumno", "Tutoría (tema)", "Mentor", "Fecha Reserva", "Estado"};
         modeloTabla = new DefaultTableModel(columnas, 0) {
@@ -84,9 +76,6 @@ public class ReservasDialog extends JDialog {
         return new JScrollPane(tabla);
     }
 
-    // ─────────────────────────────────────────
-    // BOTONES
-    // ─────────────────────────────────────────
     private JPanel crearPanelBotones() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
 
@@ -107,10 +96,6 @@ public class ReservasDialog extends JDialog {
 
         return panel;
     }
-
-    // ─────────────────────────────────────────
-    // LÓGICA
-    // ─────────────────────────────────────────
 
     private void cargarCombos() {
         // Alumnos

@@ -3,6 +3,8 @@ package DAO;
 import Model.Mentorship;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public class MentorshipDAO {
@@ -130,6 +132,15 @@ public class MentorshipDAO {
         try {
             return em.createQuery("SELECT DISTINCT m FROM Mentorship m " + "JOIN FETCH m.codMentor " + "JOIN FETCH m.codSubject " + "WHERE m.codSubject.id = :subjectId",  // ← sin el AND estado='disponible'
                     Mentorship.class).setParameter("subjectId", subjectId).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    public boolean existeDuplicado(int mentorId, int subjectId, LocalDate fecha, LocalTime hora) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Long count = em.createQuery("SELECT COUNT(m) FROM Mentorship m " + "WHERE m.codMentor.id = :mentorId " + "AND m.codSubject.id = :subjectId " + "AND m.fecha = :fecha " + "AND m.hora = :hora", Long.class).setParameter("mentorId", mentorId).setParameter("subjectId", subjectId).setParameter("fecha", fecha).setParameter("hora", hora).getSingleResult();
+            return count > 0;
         } finally {
             em.close();
         }

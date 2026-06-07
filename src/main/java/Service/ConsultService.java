@@ -28,7 +28,7 @@ public class ConsultService {
         return bookingDAO.findByAlumnoEager(alumnoId);
     }
 
-    // Total de horas ofrecidas (todas las tutorías)
+    // Total de horas ofrecidas
     public int getTotalHoras() {
         return mentorshipDAO.findAll().stream().mapToInt(m -> m.getDuracion()).sum() / 60;
     }

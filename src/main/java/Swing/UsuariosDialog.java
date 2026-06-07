@@ -40,9 +40,6 @@ public class UsuariosDialog extends JDialog {
         setVisible(true);
     }
 
-    // ─────────────────────────────────────────
-    // FORMULARIO
-    // ─────────────────────────────────────────
     private JPanel crearPanelFormulario() {
         JPanel panel = new JPanel(new GridLayout(3, 4, 8, 8));
         panel.setBorder(BorderFactory.createTitledBorder("Datos del Usuario"));
@@ -68,16 +65,12 @@ public class UsuariosDialog extends JDialog {
         campoCiclo = new JTextField();
         panel.add(campoCiclo);
 
-        // celda vacía para completar el grid
         panel.add(new JLabel());
         panel.add(new JLabel());
 
         return panel;
     }
 
-    // ─────────────────────────────────────────
-    // TABLA
-    // ─────────────────────────────────────────
     private JScrollPane crearTabla() {
         String[] columnas = {"ID", "Nombre", "Email", "Rol", "Ciclo"};
         modeloTabla = new DefaultTableModel(columnas, 0) {
@@ -90,7 +83,6 @@ public class UsuariosDialog extends JDialog {
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabla.getColumnModel().getColumn(0).setMaxWidth(50);
 
-        // Al seleccionar una fila, rellena el formulario
         tabla.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 rellenarFormularioDesdeTabla();
@@ -100,9 +92,6 @@ public class UsuariosDialog extends JDialog {
         return new JScrollPane(tabla);
     }
 
-    // ─────────────────────────────────────────
-    // BOTONES
-    // ─────────────────────────────────────────
     private JPanel crearPanelBotones() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
 
@@ -126,10 +115,6 @@ public class UsuariosDialog extends JDialog {
 
         return panel;
     }
-
-    // ─────────────────────────────────────────
-    // LÓGICA CRUD
-    // ─────────────────────────────────────────
 
     private void cargarUsuarios() {
         modeloTabla.setRowCount(0); // limpia la tabla
@@ -214,11 +199,6 @@ public class UsuariosDialog extends JDialog {
         }
     }
 
-    // ─────────────────────────────────────────
-    // HELPERS
-    // ─────────────────────────────────────────
-
-    /** Rellena el formulario con los datos de la fila seleccionada */
     private void rellenarFormularioDesdeTabla() {
         int fila = tabla.getSelectedRow();
         if (fila == -1) return;
@@ -231,7 +211,6 @@ public class UsuariosDialog extends JDialog {
         campoPassword.setText(""); // la contraseña no se muestra por seguridad
     }
 
-    /** Limpia el formulario y deselecciona */
     private void limpiarFormulario() {
         idSeleccionado = null;
         campoNombre.setText("");
@@ -242,7 +221,6 @@ public class UsuariosDialog extends JDialog {
         tabla.clearSelection();
     }
 
-    /** Comprueba que los campos obligatorios no estén vacíos */
     private boolean validarCampos() {
         if (campoNombre.getText().trim().isEmpty() ||
                 campoEmail.getText().trim().isEmpty() ||

@@ -42,46 +42,46 @@ public class MainWindow extends JFrame {
 
         add(panelCentral);
 
-        setVisible(true); // Siempre al final
+        setVisible(true);
     }
 
     private JMenuBar crearMenuBar() {
         JMenuBar menuBar = new JMenuBar();
 
-        // ── Usuarios ──
+        // menú Usuarios
         JMenu menuUsuarios = new JMenu("Usuarios");
 
         JMenuItem itemUsuarios = new JMenuItem("Gestionar Usuarios");
         itemUsuarios.addActionListener(e -> new UsuariosDialog(this));
         menuUsuarios.add(itemUsuarios);
 
-        // ── Materias ──
+        // menú de Materias
         JMenu menuMaterias = new JMenu("Materias");
         JMenuItem itemMaterias = new JMenuItem("Gestionar Materias");
         itemMaterias.addActionListener(e -> new MateriasDialog(this));
         menuMaterias.add(itemMaterias);
 
-        // ── Tutorías ──
+        // menú de Tutorías
         JMenu menuTutorias = new JMenu("Tutorías");
         JMenuItem itemTutorias = new JMenuItem("Gestionar Tutorías");
         itemTutorias.addActionListener(e -> new TutoriasDialog(this));
         menuTutorias.add(itemTutorias);
 
-        // ── Reservas ──
+        // menú de Reservas
         JMenu menuReservas = new JMenu("Reservas");
         JMenuItem itemReservas = new JMenuItem("Gestionar Reservas");
         itemReservas.addActionListener(e -> new ReservasDialog(this));
         menuReservas.add(itemReservas);
 
-        // ── Consultas ──
+        // menú de Consultas
         JMenu menuConsultas = new JMenu("Consultas");
         JMenuItem itemConsultas = new JMenuItem("Ver Consultas");
         itemConsultas.addActionListener(e -> new ConsultasDialog(this));
         menuConsultas.add(itemConsultas);
 
-        menuBar.add(menuConsultas); // antes del de Salir
+        menuBar.add(menuConsultas);
 
-        // ── Salir ──
+        // menú de Salir
         JMenu menuSalir = new JMenu("Salir");
         JMenuItem itemSalir = new JMenuItem("Cerrar aplicación");
         itemSalir.addActionListener(e -> System.exit(0));

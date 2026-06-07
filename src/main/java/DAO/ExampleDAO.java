@@ -8,6 +8,7 @@ import java.util.Objects;
 
 /**
  * @author Alberto
+ * @deprecated
  */
 public class ExampleDAO {
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernateConfig");
