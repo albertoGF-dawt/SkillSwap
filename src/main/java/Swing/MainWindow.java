@@ -16,8 +16,18 @@ public class MainWindow extends JFrame {
         setJMenuBar(crearMenuBar());
 
         // Panel central de bienvenida
-        JPanel panelCentral = new JPanel(new GridLayout(3, 1));
+        JPanel panelCentral = new JPanel(new GridLayout(3, 1)) {
+            private final Image imagen = new ImageIcon(
+                    getClass().getResource("/images/dab809b4-d9d4-4e7e-b8d4-aee75e6bdf52.png")
+            ).getImage();
 
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        panelCentral.setOpaque(false);
         JLabel bienvenida  = new JLabel("Te damos la bienvenida a Skillswap", SwingConstants.CENTER);
         JLabel descripcion = new JLabel("Elige qué opción quieres elegir en el menú superior.", SwingConstants.CENTER);
         JLabel gracias     = new JLabel("Gracias por usar nuestros servicios.", SwingConstants.CENTER);
@@ -31,8 +41,7 @@ public class MainWindow extends JFrame {
         panelCentral.add(gracias);
 
         add(panelCentral);
-        new ImageIcon(getClass().getResource("/images/dab809b4-d9d4-4e7e-b8d4-aee75e6bdf52.png")).getImage();
-
+      
         setVisible(true); // Siempre al final
     }
 
