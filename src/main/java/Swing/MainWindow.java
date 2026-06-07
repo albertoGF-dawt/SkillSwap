@@ -16,16 +16,20 @@ public class MainWindow extends JFrame {
         setJMenuBar(crearMenuBar());
 
         // Panel central de bienvenida
-        JPanel panelCentral = new JPanel(new BorderLayout());
-        JLabel bienvenida = new JLabel("Te damos la bienvenida a Skillswap", SwingConstants.CENTER);
-        JLabel descripcion = new JLabel("Elije que opción quieres elegir en el menú superior de la ventana.", SwingConstants.BOTTOM);
-        JLabel gracias = new JLabel("Gracias por usar nuestros servicios.", SwingConstants.TOP);
+        JPanel panelCentral = new JPanel(new GridLayout(3, 1));
+
+        JLabel bienvenida  = new JLabel("Te damos la bienvenida a Skillswap", SwingConstants.CENTER);
+        JLabel descripcion = new JLabel("Elige qué opción quieres elegir en el menú superior.", SwingConstants.CENTER);
+        JLabel gracias     = new JLabel("Gracias por usar nuestros servicios.", SwingConstants.CENTER);
+
         bienvenida.setFont(new Font("Comfortaa", Font.BOLD, 24));
         descripcion.setFont(new Font("Comfortaa", Font.BOLD, 18));
         gracias.setFont(new Font("Comfortaa", Font.BOLD, 14));
-        panelCentral.add(bienvenida, BorderLayout.CENTER);
-        panelCentral.add(descripcion, BorderLayout.CENTER);
-        panelCentral.add(gracias, BorderLayout.CENTER);
+
+        panelCentral.add(bienvenida);
+        panelCentral.add(descripcion);
+        panelCentral.add(gracias);
+
         add(panelCentral);
 
         setVisible(true); // Siempre al final
