@@ -34,7 +34,7 @@ public class TutoriasDialog extends JDialog {
     private JTable tabla;
     private DefaultTableModel modeloTabla;
     private Integer idSeleccionado = null;
-
+    //crea el Jframe
     public TutoriasDialog(JFrame parent) {
         super(parent, "Gestión de Tutorías", true);
         setSize(900, 600);
@@ -49,7 +49,7 @@ public class TutoriasDialog extends JDialog {
         cargarTutorias();
         setVisible(true);
     }
-
+    //crea el formulario
     private JPanel crearPanelFormulario() {
         JPanel panel = new JPanel(new GridLayout(4, 4, 8, 6));
         panel.setBorder(BorderFactory.createTitledBorder("Datos de la Tutoría"));
@@ -89,7 +89,7 @@ public class TutoriasDialog extends JDialog {
 
         return panel;
     }
-
+    //crea las tablas
     private JScrollPane crearTabla() {
         String[] columnas = {"ID", "Tema", "Fecha", "Hora", "Duración", "Lugar", "Mentor", "Materia", "Estado"};
         modeloTabla = new DefaultTableModel(columnas, 0) {
@@ -106,7 +106,7 @@ public class TutoriasDialog extends JDialog {
 
         return new JScrollPane(tabla);
     }
-
+    //crea los botone4s con sus llamadas
     private JPanel crearPanelBotones() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
 
@@ -130,7 +130,7 @@ public class TutoriasDialog extends JDialog {
 
         return panel;
     }
-
+    //este métodso carga los objetos para que se vean bien
     private void cargarCombos() {
         // Mentores: usuarios con rol mentor
         comboMentor.removeAllItems();
@@ -166,7 +166,7 @@ public class TutoriasDialog extends JDialog {
             });
         }
     }
-
+    //crea la tutoría
     private void crearTutoria() {
         Mentorship m = construirMentorshipDesdeFormulario();
         if (m == null) return;
@@ -183,6 +183,7 @@ public class TutoriasDialog extends JDialog {
             JOptionPane.showMessageDialog(this, "Error al crear la tutoría:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     private void actualizarTutoria() {
         if (idSeleccionado == null) {
             JOptionPane.showMessageDialog(this, "Selecciona una tutoría de la tabla primero.", "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -228,7 +229,7 @@ public class TutoriasDialog extends JDialog {
             }
         }
     }
-
+    //crea un objeto de mentorship a guardar
     private Mentorship construirMentorshipDesdeFormulario() {
         String tema     = campoTema.getText().trim();
         String fechaStr = campoFecha.getText().trim();

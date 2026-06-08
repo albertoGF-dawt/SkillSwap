@@ -76,7 +76,8 @@ public class BookingDAO {
     public List<Booking> findAll() {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createNamedQuery("Booking.findAll", Booking.class).getResultList();
+            return em.createNamedQuery("Booking.findAll", Booking.class)
+                    .getResultList();
         } finally {
             em.close();
         }
@@ -85,7 +86,9 @@ public class BookingDAO {
     public List<Booking> findByAlumno(int alumnoId) {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("SELECT b FROM Booking b WHERE b.codAlumno.id = :alumnoId", Booking.class).setParameter("alumnoId", alumnoId).getResultList();
+            return em.createQuery("SELECT b FROM Booking b WHERE b.codAlumno.id = :alumnoId", Booking.class)
+                    .setParameter("alumnoId", alumnoId)
+                    .getResultList();
         } finally {
             em.close();
         }
@@ -94,7 +97,9 @@ public class BookingDAO {
     public boolean isMentorshipAlreadyBooked(int mentorshipId) {
         EntityManager em = emf.createEntityManager();
         try {
-            Long count = em.createQuery("SELECT COUNT(b) FROM Booking b WHERE b.codMentorship.id = :mentorshipId", Long.class).setParameter("mentorshipId", mentorshipId).getSingleResult();
+            Long count = em.createQuery("SELECT COUNT(b) FROM Booking b WHERE b.codMentorship.id = :mentorshipId", Long.class)
+                    .setParameter("mentorshipId", mentorshipId)
+                    .getSingleResult();
             return count > 0;
         } finally {
             em.close();
@@ -104,7 +109,9 @@ public class BookingDAO {
     public List<Booking> findByMentorship(int mentorshipId) {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("SELECT b FROM Booking b WHERE b.codMentorship.id = :mentorshipId", Booking.class).setParameter("mentorshipId", mentorshipId).getResultList();
+            return em.createQuery("SELECT b FROM Booking b WHERE b.codMentorship.id = :mentorshipId", Booking.class)
+                    .setParameter("mentorshipId", mentorshipId)
+                    .getResultList();
         } finally {
             em.close();
         }
@@ -113,7 +120,8 @@ public class BookingDAO {
     public List<Booking> findAllEager() {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("SELECT b FROM Booking b " + "JOIN FETCH b.codAlumno " + "JOIN FETCH b.codMentorship m " + "JOIN FETCH m.codMentor " + "JOIN FETCH m.codSubject", Booking.class).getResultList();
+            return em.createQuery("SELECT b FROM Booking b JOIN FETCH b.codAlumno JOIN FETCH b.codMentorship m JOIN FETCH m.codMentor JOIN FETCH m.codSubject", Booking.class)
+                    .getResultList();
         } finally {
             em.close();
         }
@@ -122,7 +130,9 @@ public class BookingDAO {
     public List<Booking> findByAlumnoEager(int alumnoId) {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("SELECT b FROM Booking b " + "JOIN FETCH b.codAlumno " + "JOIN FETCH b.codMentorship m " + "JOIN FETCH m.codMentor " + "JOIN FETCH m.codSubject " + "WHERE b.codAlumno.id = :alumnoId", Booking.class).setParameter("alumnoId", alumnoId).getResultList();
+            return em.createQuery("SELECT b FROM Booking b JOIN FETCH b.codAlumno JOIN FETCH b.codMentorship m JOIN FETCH m.codMentor JOIN FETCH m.codSubject WHERE b.codAlumno.id = :alumnoId", Booking.class)
+                    .setParameter("alumnoId", alumnoId)
+                    .getResultList();
         } finally {
             em.close();
         }

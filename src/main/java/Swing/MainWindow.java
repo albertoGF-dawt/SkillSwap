@@ -10,7 +10,8 @@ public class MainWindow extends JFrame {
         setTitle("Sistema de Tutorías");
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // Centrar en pantalla
+        // Centrar en pantalla
+        setLocationRelativeTo(null);
 
         // Crear y añadir el menú
         setJMenuBar(crearMenuBar());
@@ -18,15 +19,16 @@ public class MainWindow extends JFrame {
         // Panel central de bienvenida
         JPanel panelCentral = new JPanel(new GridLayout(3, 1)) {
             private final Image imagen = new ImageIcon(
-                    "C:/Users/Alber/Desktop/INTELLIJ/examen/SkillSwap/src/main/java/Swing/Images/dab809b4-d9d4-4e7e-b8d4-aee75e6bdf52.png"
-            ).getImage();
+                    "/Swing/Images/dab809b4-d9d4-4e7e-b8d4-aee75e6bdf52.png").getImage();
 
+            //pinta el Jframe
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             }
         };
+        //mensajes del Jframe
         panelCentral.setOpaque(false);
         JLabel bienvenida  = new JLabel("Te damos la bienvenida a Skillswap", SwingConstants.CENTER);
         JLabel descripcion = new JLabel("Elige qué opción quieres elegir en el menú superior.", SwingConstants.CENTER);
@@ -98,8 +100,8 @@ public class MainWindow extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        menuBar.setBackground(new Color(190, 149, 223));   // fondo de la barra
+        // fondo de la barra superior de menus/Dialogs
+        menuBar.setBackground(new Color(190, 149, 223));
         menuBar.setOpaque(true);
         return menuBar;
     }

@@ -17,6 +17,7 @@ public class MateriasDialog extends JDialog {
     private DefaultTableModel modeloTabla;
     private Integer idSeleccionado = null;
 
+    //se ajusta el Jframe
     public MateriasDialog(JFrame parent) {
         super(parent, "Gestión de Materias", true);
         setSize(500, 400);
@@ -31,6 +32,7 @@ public class MateriasDialog extends JDialog {
         setVisible(true);
     }
 
+    //panel de formulario
     private JPanel crearPanelFormulario() {
         JPanel panel = new JPanel(new GridLayout(1, 2, 8, 8));
         panel.setBorder(BorderFactory.createTitledBorder("Datos de la Materia"));
@@ -42,7 +44,7 @@ public class MateriasDialog extends JDialog {
 
         return panel;
     }
-
+    //columnas de ID y nombre de las materias
     private JScrollPane crearTabla() {
         String[] columnas = {"ID", "Nombre"};
         modeloTabla = new DefaultTableModel(columnas, 0) {
@@ -81,6 +83,7 @@ public class MateriasDialog extends JDialog {
         return panel;
     }
 
+    //método que llama al DAO
     private void cargarMaterias() {
         modeloTabla.setRowCount(0);
         List<Subject> subjects = subjectDAO.getSubjects();
@@ -89,6 +92,7 @@ public class MateriasDialog extends JDialog {
         }
     }
 
+    //las validaciones se hacen en subjectDAO porque no hay un serviceSubject y sería una tontería hacer uno para una validación
     private void guardarMateria() {
         String nombre = campoNombre.getText().trim();
         if (nombre.isEmpty()) {
@@ -143,6 +147,7 @@ public class MateriasDialog extends JDialog {
         }
     }
 
+    //recupera los datos de la materia al hacerle click en la tabla
     private void rellenarFormularioDesdeTabla() {
         int fila = tabla.getSelectedRow();
         if (fila == -1) return;

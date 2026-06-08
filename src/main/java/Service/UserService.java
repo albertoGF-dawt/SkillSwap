@@ -33,7 +33,7 @@ public class UserService {
         }
         userDAO.delete(id);
     }
-
+    //método de pruebas no está en el resultado final
     public void deleteAllUsers() {
         userDAO.deleteAll();
     }

@@ -25,6 +25,7 @@ public class ReservasDialog extends JDialog {
     private DefaultTableModel modeloTabla;
     private Integer idSeleccionado = null;
 
+    //crea el JFRAME y llama a las cosas en el panel
     public ReservasDialog(JFrame parent) {
         super(parent, "Gestión de Reservas", true);
         setSize(900, 550);
@@ -39,7 +40,7 @@ public class ReservasDialog extends JDialog {
         cargarReservas();
         setVisible(true);
     }
-
+    //crea un formulario
     private JPanel crearPanelFormulario() {
         JPanel panel = new JPanel(new GridLayout(2, 2, 8, 8));
         panel.setBorder(BorderFactory.createTitledBorder("Nueva Reserva"));
@@ -55,7 +56,7 @@ public class ReservasDialog extends JDialog {
 
         return panel;
     }
-
+    //crea las columnas con sus nombres de columna
     private JScrollPane crearTabla() {
         String[] columnas = {"ID", "Alumno", "Tutoría (tema)", "Mentor", "Fecha Reserva", "Estado"};
         modeloTabla = new DefaultTableModel(columnas, 0) {
@@ -75,7 +76,7 @@ public class ReservasDialog extends JDialog {
 
         return new JScrollPane(tabla);
     }
-
+    //botones con llamadas a métodos
     private JPanel crearPanelBotones() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
 
@@ -96,7 +97,7 @@ public class ReservasDialog extends JDialog {
 
         return panel;
     }
-
+    //llama y obtiene todos los atributos de el objeto
     private void cargarCombos() {
         // Alumnos
         comboAlumno.removeAllItems();
@@ -124,7 +125,7 @@ public class ReservasDialog extends JDialog {
             });
         }
     }
-
+    //crea la reserva a partir de booking service
     private void crearReserva() {
         User alumno       = (User) comboAlumno.getSelectedItem();
         Mentorship tutoria = (Mentorship) comboTutoria.getSelectedItem();
@@ -141,13 +142,13 @@ public class ReservasDialog extends JDialog {
         try {
             bookingService.createBooking(booking);
             JOptionPane.showMessageDialog(this, "Reserva realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            cargarCombos();   // refresca tutorías disponibles
+            cargarCombos();
             cargarReservas();
         } catch (RuntimeException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
         }
     }
-
+    //cancela las reserva
     private void cancelarReserva() {
         if (idSeleccionado == null) {
             JOptionPane.showMessageDialog(this, "Selecciona una reserva de la tabla primero.", "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -169,7 +170,7 @@ public class ReservasDialog extends JDialog {
             }
         }
     }
-
+    //completa las reservas (Hay un mini error pero funciona)
     private void completarReserva() {
         if (idSeleccionado == null) {
             JOptionPane.showMessageDialog(this, "Selecciona una reserva de la tabla primero.", "Aviso", JOptionPane.WARNING_MESSAGE);

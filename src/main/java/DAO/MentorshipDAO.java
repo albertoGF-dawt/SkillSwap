@@ -85,7 +85,8 @@ public class MentorshipDAO {
     public List<Mentorship> findAvailable() {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("SELECT m FROM Mentorship m WHERE m.estado = 'disponible' AND m.fecha >= CURRENT_DATE", Mentorship.class).getResultList();
+            return em.createQuery("SELECT m FROM Mentorship m WHERE m.estado = 'disponible' AND m.fecha >= CURRENT_DATE", Mentorship.class)
+                    .getResultList();
         } finally {
             em.close();
         }
@@ -94,7 +95,9 @@ public class MentorshipDAO {
     public List<Mentorship> findByMentor(int mentorId) {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("SELECT m FROM Mentorship m WHERE m.codMentor.id = :mentorId", Mentorship.class).setParameter("mentorId", mentorId).getResultList();
+            return em.createQuery("SELECT m FROM Mentorship m WHERE m.codMentor.id = :mentorId", Mentorship.class)
+                    .setParameter("mentorId", mentorId)
+                    .getResultList();
         } finally {
             em.close();
         }
@@ -103,7 +106,9 @@ public class MentorshipDAO {
     public List<Mentorship> findByMentorEager(int mentorId) {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("SELECT m FROM Mentorship m " + "JOIN FETCH m.codMentor " + "JOIN FETCH m.codSubject " + "WHERE m.codMentor.id = :mentorId", Mentorship.class).setParameter("mentorId", mentorId).getResultList();
+            return em.createQuery("SELECT m FROM Mentorship m JOIN FETCH m.codMentor JOIN FETCH m.codSubject WHERE m.codMentor.id = :mentorId", Mentorship.class)
+                    .setParameter("mentorId", mentorId)
+                    .getResultList();
         } finally {
             em.close();
         }
@@ -112,7 +117,9 @@ public class MentorshipDAO {
     public List<Mentorship> findBySubject(int subjectId) {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("SELECT m FROM Mentorship m WHERE m.codSubject.id = :subjectId AND m.estado = 'disponible'", Mentorship.class).setParameter("subjectId", subjectId).getResultList();
+            return em.createQuery("SELECT m FROM Mentorship m WHERE m.codSubject.id = :subjectId AND m.estado = 'disponible'", Mentorship.class)
+                    .setParameter("subjectId", subjectId)
+                    .getResultList();
         } finally {
             em.close();
         }
@@ -121,7 +128,8 @@ public class MentorshipDAO {
     public List<Mentorship> findAllEager() {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("SELECT m FROM Mentorship m " + "JOIN FETCH m.codMentor " + "JOIN FETCH m.codSubject", Mentorship.class).getResultList();
+            return em.createQuery("SELECT m FROM Mentorship m JOIN FETCH m.codMentor JOIN FETCH m.codSubject", Mentorship.class)
+                    .getResultList();
         } finally {
             em.close();
         }
@@ -130,8 +138,9 @@ public class MentorshipDAO {
     public List<Mentorship> findBySubjectEager(int subjectId) {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("SELECT DISTINCT m FROM Mentorship m " + "JOIN FETCH m.codMentor " + "JOIN FETCH m.codSubject " + "WHERE m.codSubject.id = :subjectId",  // ← sin el AND estado='disponible'
-                    Mentorship.class).setParameter("subjectId", subjectId).getResultList();
+            return em.createQuery("SELECT DISTINCT m FROM Mentorship m JOIN FETCH m.codMentor JOIN FETCH m.codSubject WHERE m.codSubject.id = :subjectId", Mentorship.class)
+                    .setParameter("subjectId", subjectId)
+                    .getResultList();
         } finally {
             em.close();
         }
@@ -139,7 +148,12 @@ public class MentorshipDAO {
     public boolean existeDuplicado(int mentorId, int subjectId, LocalDate fecha, LocalTime hora) {
         EntityManager em = emf.createEntityManager();
         try {
-            Long count = em.createQuery("SELECT COUNT(m) FROM Mentorship m " + "WHERE m.codMentor.id = :mentorId " + "AND m.codSubject.id = :subjectId " + "AND m.fecha = :fecha " + "AND m.hora = :hora", Long.class).setParameter("mentorId", mentorId).setParameter("subjectId", subjectId).setParameter("fecha", fecha).setParameter("hora", hora).getSingleResult();
+            Long count = em.createQuery("SELECT COUNT(m) FROM Mentorship m WHERE m.codMentor.id = :mentorId AND m.codSubject.id = :subjectId AND m.fecha = :fecha AND m.hora = :hora", Long.class)
+                    .setParameter("mentorId", mentorId)
+                    .setParameter("subjectId", subjectId)
+                    .setParameter("fecha", fecha)
+                    .setParameter("hora", hora)
+                    .getSingleResult();
             return count > 0;
         } finally {
             em.close();

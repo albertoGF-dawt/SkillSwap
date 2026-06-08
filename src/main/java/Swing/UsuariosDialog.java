@@ -39,7 +39,7 @@ public class UsuariosDialog extends JDialog {
         cargarUsuarios(); // carga datos reales al abrir
         setVisible(true);
     }
-
+    //crea el Jpanel
     private JPanel crearPanelFormulario() {
         JPanel panel = new JPanel(new GridLayout(3, 4, 8, 8));
         panel.setBorder(BorderFactory.createTitledBorder("Datos del Usuario"));

@@ -18,13 +18,10 @@ public class SubjectDAO {
         try {
             em.getTransaction().begin();
             if(subject.getId() == null) {
-                //Crea si no existe
                 em.persist(subject);
             }
-            //verifica que se haya creado la materia
             em.getTransaction().commit();
         } catch (Exception e) {
-            //hace rollback si falla (Rollback: revertir)
             em.getTransaction().rollback();
             throw new IllegalArgumentException("ERROR, algo falló");
         }
@@ -56,7 +53,6 @@ public class SubjectDAO {
     public void delete(int id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        //Busca a una asignatura por su id en la Base de Datos
         Subject subject = em.find(Subject.class, id);
         if (subject != null) {
             em.remove(subject);
@@ -71,9 +67,8 @@ public class SubjectDAO {
         EntityManager em = emf.createEntityManager();
         try {
             Long count = em.createQuery(
-                            "SELECT COUNT(m) FROM Mentorship m WHERE m.codSubject.id = :id",
-                            Long.class
-                    ).setParameter("id", subjectId)
+                            "SELECT COUNT(m) FROM Mentorship m WHERE m.codSubject.id = :id", Long.class)
+                    .setParameter("id", subjectId)
                     .getSingleResult();
             return count > 0;
         } finally {
