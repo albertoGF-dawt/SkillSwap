@@ -16,12 +16,11 @@ public class MainWindow extends JFrame {
         // Crear y añadir el menú
         setJMenuBar(crearMenuBar());
 
-        // Panel central de bienvenida
+        //modificas el fondo del panel
         JPanel panelCentral = new JPanel(new GridLayout(3, 1)) {
             private final Image imagen = new ImageIcon(
-                    "/Swing/Images/dab809b4-d9d4-4e7e-b8d4-aee75e6bdf52.png").getImage();
+                    "src/main/java/Swing/Images/dab809b4-d9d4-4e7e-b8d4-aee75e6bdf52.png").getImage();
 
-            //pinta el Jframe
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
